@@ -3,12 +3,13 @@ import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import { useNavigate } from "react-router-dom";
 import { Container, Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
 
 const columns = [
-  { field: 'id', headerName: 'ID', width: 90 },
+  { field: 'id', headerName: 'ID', width: 90 }, // Make sure the field name is in lowercase if that's what your database uses
   {
     field: 'firstName',
-    headerName: 'First name',
+    headerName: 'first name',
     width: 150,
     editable: true,
   },
@@ -19,24 +20,14 @@ const columns = [
     editable: true,
   },
   {
-    field: 'age',
-    headerName: 'Age',
-    type: 'number',
-    width: 110,
+    field: 'department',
+    headerName: 'Department',
+    width: 160,
     editable: true,
   },
   {
-    field: 'fullName',
-    headerName: 'Full name',
-    description: 'This column has a value getter and is not sortable.',
-    sortable: false,
-    width: 160,
-    valueGetter: (params) =>
-      `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-  },
-  {
-    field: 'Specialisation',
-    headerName: 'Specialisation',
+    field: "expertise", // Make sure the field name is in lowercase if that's what your database uses
+    headerName: 'Expertise',
     width: 150,
   },
   {
@@ -44,34 +35,49 @@ const columns = [
     headerName: 'Email',
     width: 200,
   },
-  {
-    field: 'phone',
-    headerName: 'Phone',
-    width: 150,
-  },
-  {
-    field: 'location',
-    headerName: 'Location',
-    width: 150,
-  },
+
 ];
 
-export const rows = [
-  // ... Your rows data ...
-{ id: 1, lastName: 'Snow', firstName: 'Jon', age: 14, Specialisation: 'Criminal Law', email: 'Johnsnow@email.com', phone: '123456789', location: 'London, UK'},
-{ id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 31 },
-{ id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 31 },
-{ id: 4, lastName: 'Stark', firstName: 'Arya', age: 11 },
-{ id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-{ id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-{ id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-{ id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-{ id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-];
+
+
+
 
 export default function UserList() {
+  const [rows, setRows] = useState([]); // Add state for rows
   const navigate = useNavigate();
+
+  // Function to fetch users from the backend
+  useEffect(() => {
+    async function fetchUsers() {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/employees`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const json = await response.json();
+        // Map the backend data to the DataGrid expected format
+        const mappedRows = json.data.map((item) => ({
+          id: item.ID, // 'id' field is expected by DataGrid for the row id
+          firstName: item.FirstName,
+          lastName: item.LastName,
+          // Assuming your backend does not provide 'age', 'phone', and 'location', you might want to add them as null or some default value
+          age: null, // or some default value if you have it
+          expertise: item.Expertise,
+          department: item.Department,
+          email: item.Email,
+          phone: null, // or some default value if you have it
+          location: null, // or some default value if you have it
+        }));
+        setRows(mappedRows); // Use the mapped data for the rows state
+      } catch (error) {
+        console.error("Could not fetch users: ", error);
+      }
+    }
   
+    fetchUsers();
+  }, []);
+  
+
   const handleRowClick = (params) => {
     // Navigate to the user profile page with the user's id
     navigate(`/user-profile/${params.row.id}`);
@@ -104,17 +110,6 @@ export default function UserList() {
     </Container>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

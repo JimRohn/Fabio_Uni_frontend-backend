@@ -2,6 +2,17 @@ const express = require('express');
 const app = express();
 const PORT = 3001;
 
+const cors = require('cors');
+
+// Enable all CORS requests
+app.use(cors());
+
+// Or, to enable CORS requests only from your frontend:
+app.use(cors({
+  origin: 'http://localhost:3000'
+}));
+
+
 app.use(express.json()); // Middleware for parsing JSON bodies
 
 // Root endpoint
@@ -44,6 +55,8 @@ app.get('/employees', (req, res) => {
       res.status(500).json({ error: err.message });
       return;
     }
+
+    console.log(rows); // This will output the data to the console
     res.json({
       message: "success",
       data: rows
