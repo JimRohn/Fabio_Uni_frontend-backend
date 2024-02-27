@@ -1,0 +1,86 @@
+[
+    {
+      "id": 1,
+      "type": "Technical ",
+      "course_list": [
+        {
+          "id": 1,
+          "name": "AI Applications in Law",
+          "duration": 5 ,
+          "rating": 4.5,
+          "numberOfReviews": 462,
+          "price": 465,
+          "image": "/images/courses/AI_Law.jpeg"
+        },
+        {
+          "id": 2,
+          "name": "Data Management ",
+          "duration": 8,
+          "rating": 3.5,
+          "numberOfReviews": 641,
+          "price": 385,
+          "image": "  /images/courses/DataManagementCourse.jpeg  "
+        },
+        {
+          "id": 3,
+          "name": "Project Management",
+          "duration": 2,
+          "rating": 4.5,
+          "numberOfReviews": 133,
+          "price": 144,
+          "image": "/images/courses/JiraCourse.jpeg"
+        },
+        {
+          "id": 4,
+          "name": "Microsoft Office ",
+          "duration": 5,
+          "rating": 4.5,
+          "numberOfReviews": 462,
+          "price": 465,
+          "image": "/images/courses/MicrosoftOffice.png"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "type": "Law",
+      "course_list": [
+        {
+          "id": 4,
+          "name": "Business Law",
+          "duration": 5,
+          "rating": 4.5,
+          "numberOfReviews": 462,
+          "price": 465,
+          "image": "/images/courses/businessLaw.jpeg"
+        },
+        {
+          "id": 5,
+          "name": "Commercial Law",
+          "duration": 5,
+          "rating": 4.5,
+          "numberOfReviews": 462,
+          "price": 465,
+          "image": "/images/courses/commercial-law.jpg"
+        },
+        {
+          "id": 6,
+          "name": "International Law",
+          "duration": 8,
+          "rating": 3.5,
+          "numberOfReviews": 641,
+          "price": 385,
+          "image": "/images/courses/InternationalLaw.webp"
+        },
+        {
+          "id": 7,
+          "name": "Criminal Law",
+          "duration": 2,
+          "rating": 4.5,
+          "numberOfReviews": 133,
+          "price": 144,
+          "image": "/images/courses/criminal-law.jpg"
+        }
+      ]
+    }
+  ]
