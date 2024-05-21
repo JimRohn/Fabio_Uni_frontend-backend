@@ -2,7 +2,7 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React from "react";
 import SearchAppBar from "./components/SearchAppBar/SearchAppBar";
-
+import SemanticSearchBar from "./components/SemanticSearchBar/SemanticSearchBar";
 import Home from "./pages/Home";
 import UserProfile from "./pages/UserProfile";
 import PermanentDrawerLeft from "./components/NavBar/NavBar";
@@ -11,6 +11,7 @@ import Learning from "./pages/Learning";
 import UserList from "./pages/UserList";
 import Events from "./pages/Events";
 import Matters from "./pages/Matters";
+
 
 function App() {
   const drawerWidth = 240;

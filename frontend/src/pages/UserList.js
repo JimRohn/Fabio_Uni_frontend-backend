@@ -4,18 +4,19 @@ import { DataGrid } from '@mui/x-data-grid';
 import { useNavigate } from "react-router-dom";
 import { Container, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
+import SemanticSearchBar from '../components/SemanticSearchBar/SemanticSearchBar';
 
 const columns = [
-  { field: 'id', headerName: 'ID', width: 90 }, // Make sure the field name is in lowercase if that's what your database uses
+  { field: 'id', headerName: 'ID', width: 90 },
   {
     field: 'firstName',
-    headerName: 'first name',
+    headerName: 'First Name',
     width: 150,
     editable: true,
   },
   {
     field: 'lastName',
-    headerName: 'Last name',
+    headerName: 'Last Name',
     width: 150,
     editable: true,
   },
@@ -26,7 +27,7 @@ const columns = [
     editable: true,
   },
   {
-    field: "expertise", // Make sure the field name is in lowercase if that's what your database uses
+    field: "expertise",
     headerName: 'Expertise',
     width: 150,
   },
@@ -35,18 +36,12 @@ const columns = [
     headerName: 'Email',
     width: 200,
   },
-
 ];
 
-
-
-
-
 export default function UserList() {
-  const [rows, setRows] = useState([]); // Add state for rows
+  const [rows, setRows] = useState([]);
   const navigate = useNavigate();
 
-  // Function to fetch users from the backend
   useEffect(() => {
     async function fetchUsers() {
       try {
@@ -55,32 +50,36 @@ export default function UserList() {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const json = await response.json();
-        // Map the backend data to the DataGrid expected format
-        const mappedRows = json.data.map((item) => ({
-          id: item.ID, // 'id' field is expected by DataGrid for the row id
+        const mappedRows = json.data.map((item, index) => ({
+          id: item.ID,
           firstName: item.FirstName,
           lastName: item.LastName,
-          // Assuming your backend does not provide 'age', 'phone', and 'location', you might want to add them as null or some default value
-          age: null, // or some default value if you have it
-          expertise: item.Expertise,
           department: item.Department,
+          expertise: item.Expertise,
           email: item.Email,
-          phone: null, // or some default value if you have it
-          location: null, // or some default value if you have it
         }));
-        setRows(mappedRows); // Use the mapped data for the rows state
+        setRows(mappedRows);
       } catch (error) {
         console.error("Could not fetch users: ", error);
       }
     }
-  
     fetchUsers();
   }, []);
-  
 
   const handleRowClick = (params) => {
-    // Navigate to the user profile page with the user's id
     navigate(`/user-profile/${params.row.id}`);
+  };
+
+  const handleSearchResults = (results) => {
+    const uniqueResults = results.map((item, index) => ({
+      id: item.ID || index, // Use existing ID or fall back to index
+      firstName: item.FirstName,
+      lastName: item.LastName,
+      department: item.Department,
+      expertise: item.Expertise,
+      email: item.Email,
+    }));
+    setRows(uniqueResults);
   };
 
   return (
@@ -89,6 +88,10 @@ export default function UserList() {
         <Typography variant="h4" component="h1">
           List of People working in the Law Firm
         </Typography>
+      </Box>
+
+      <Box display="flex" justifyContent="center" marginBottom={4}>
+        <SemanticSearchBar onSearchResults={handleSearchResults} />
       </Box>
 
       <Box sx={{ height: 400, width: '100%' }}>
@@ -110,8 +113,3 @@ export default function UserList() {
     </Container>
   );
 }
-
-
-
-
-
