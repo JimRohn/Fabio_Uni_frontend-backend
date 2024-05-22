@@ -11,6 +11,7 @@ import Learning from "./pages/Learning";
 import UserList from "./pages/UserList";
 import Events from "./pages/Events";
 import Matters from "./pages/Matters";
+import People2 from "./pages/People2";
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
           <Route path="/events" element={<Events />} />
           <Route path="/matters" element={<Matters />} />
           <Route path="/learning" element={<Learning />} />
+          <Route path="/people2" element={<People2 />} />
           {/* ... other routes */}
         </Routes>
       </Box>
