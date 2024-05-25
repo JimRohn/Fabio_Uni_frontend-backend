@@ -81,24 +81,29 @@ def initialize_db():
     try:
         conn = sqlite3.connect(DATABASE_PATH)
         cursor = conn.cursor()
-        cursor.executescript('''
-            DROP TABLE IF EXISTS Employees;
-            CREATE TABLE IF NOT EXISTS Employees (
-                ID INTEGER PRIMARY KEY,
-                FirstName TEXT,
-                LastName TEXT,
-                Department TEXT,
-                Expertise TEXT,
-                Email TEXT,
-                Location TEXT
-            );
+        
+        # Check if the table already exists
+        cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='Employees';")
+        table_exists = cursor.fetchone()
+        
+        if not table_exists:
+            cursor.executescript('''
+                CREATE TABLE IF NOT EXISTS Employees (
+                    ID INTEGER PRIMARY KEY,
+                    FirstName TEXT,
+                    LastName TEXT,
+                    Department TEXT,
+                    Expertise TEXT,
+                    Email TEXT,
+                    Location TEXT
+                );
 
-            INSERT INTO Employees (FirstName, LastName, Department, Expertise, Email, Location)
-            VALUES
-            ('John', 'Doe', 'Legal', 'Lawyer', 'john.doe@example.com', 'London'),
-            ('Jane', 'Smith', 'HR', 'Recruiter', 'jane.smith@example.com', 'London');
-        ''')
-        conn.commit()
+                INSERT INTO Employees (FirstName, LastName, Department, Expertise, Email, Location)
+                VALUES
+                ('John', 'Doe', 'Legal', 'Lawyer', 'john.doe@example.com', 'London'),
+                ('Jane', 'Smith', 'HR', 'Recruiter', 'jane.smith@example.com', 'London');
+            ''')
+            conn.commit()
         conn.close()
         return jsonify({"message": "Database initialized and populated successfully"})
     except sqlite3.Error as e:

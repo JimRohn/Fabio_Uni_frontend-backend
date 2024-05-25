@@ -27,7 +27,7 @@ const columns = [
     editable: true,
   },
   {
-    field: "expertise",
+    field: 'expertise',
     headerName: 'Expertise',
     width: 150,
   },
@@ -35,6 +35,11 @@ const columns = [
     field: 'email',
     headerName: 'Email',
     width: 200,
+  },
+  {
+    field: 'location',
+    headerName: 'Location',
+    width: 150,
   },
 ];
 
@@ -45,7 +50,7 @@ export default function UserList() {
   useEffect(() => {
     async function fetchUsers() {
       try {
-        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/employees`);
+        const response = await fetch(`http://127.0.0.1:3001/employees`);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -57,6 +62,7 @@ export default function UserList() {
           department: item.Department,
           expertise: item.Expertise,
           email: item.Email,
+          location: item.Location, // Added Location
         }));
         setRows(mappedRows);
       } catch (error) {
@@ -78,6 +84,7 @@ export default function UserList() {
       department: item.Department,
       expertise: item.Expertise,
       email: item.Email,
+      location: item.Location, // Added Location
     }));
     setRows(uniqueResults);
   };

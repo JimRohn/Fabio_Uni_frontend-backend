@@ -3,9 +3,10 @@ import axios from 'axios';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import { Container, Typography, TextField, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const columns = [
-  { field: 'ID', headerName: 'ID', width: 90 },
+  { field: 'id', headerName: 'ID', width: 90 },
   { field: 'FirstName', headerName: 'First Name', width: 150, editable: true },
   { field: 'LastName', headerName: 'Last Name', width: 150, editable: true },
   { field: 'Department', headerName: 'Department', width: 160, editable: true },
@@ -18,6 +19,7 @@ const People2 = () => {
   const [query, setQuery] = useState('');
   const [rows, setRows] = useState([]);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const initializeDatabase = async () => {
@@ -36,6 +38,10 @@ const People2 = () => {
     initializeDatabase();
   }, []);
 
+  const handleRowClick = (params) => {
+    navigate(`/user-profile/${params.row.id}`);
+  };
+
   const handleSearch = async () => {
     try {
       console.log("Query:", query);
@@ -46,8 +52,8 @@ const People2 = () => {
         throw new Error(response.data.error);
       }
 
-      const mappedRows = response.data.database_results.map((item, index) => ({
-        id: item.ID || index, // Use existing ID or fallback to index
+      const mappedRows = response.data.database_results.map((item) => ({
+        id: item.ID, // Ensure the ID field is correctly mapped
         FirstName: item.FirstName,
         LastName: item.LastName,
         Department: item.Department,
@@ -94,6 +100,12 @@ const People2 = () => {
         <DataGrid
           rows={rows}
           columns={columns}
+          onRowClick={handleRowClick}
+          initialState={{
+            pagination: {
+              pageSize: 5,
+            },
+          }}
           pageSize={5}
           rowsPerPageOptions={[5]}
           checkboxSelection

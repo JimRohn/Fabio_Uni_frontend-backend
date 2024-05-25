@@ -1,18 +1,15 @@
-import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import React from "react";
-import SearchAppBar from "./components/SearchAppBar/SearchAppBar";
-import SemanticSearchBar from "./components/SemanticSearchBar/SemanticSearchBar";
-import Home from "./pages/Home";
-import UserProfile from "./pages/UserProfile";
-import PermanentDrawerLeft from "./components/NavBar/NavBar";
-import { Box, Toolbar } from "@mui/material";
-import Learning from "./pages/Learning";
-import UserList from "./pages/UserList";
-import Events from "./pages/Events";
-import Matters from "./pages/Matters";
-import People2 from "./pages/People2";
-
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import SearchAppBar from './components/SearchAppBar/SearchAppBar';
+import Home from './pages/Home';
+import UserProfile from './pages/UserProfile';
+import PermanentDrawerLeft from './components/NavBar/NavBar';
+import { Box, Toolbar } from '@mui/material';
+import Learning from './pages/Learning';
+import UserList from './pages/UserList';
+import Events from './pages/Events';
+import Matters from './pages/Matters';
+import People2 from './pages/People2';
 
 function App() {
   const drawerWidth = 240;
