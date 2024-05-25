@@ -25,6 +25,8 @@ const drawerItems = [
   { text: "Matters", icon: <WorkIcon />, path: "/matters" },
   { text: "Events", icon: <CalendarMonthIcon />, path: "/events" },
   { text: "Learning", icon: <SchoolIcon />, path: "/learning" },
+  { text: "AI Assistant", icon: <PeopleIcon />, path: "/people2" },
+  
 ];
 
 export default function PermanentDrawerLeft() {

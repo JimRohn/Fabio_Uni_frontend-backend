@@ -8,6 +8,9 @@ const PORT = 3001;
 app.use(cors());
 app.use(express.json());
 
+// Serve static files from the public directory
+app.use('/static', express.static('public'));
+
 // SQLite setup
 let db = new sqlite3.Database('./database/tami_me.db', (err) => {
   if (err) {
@@ -31,7 +34,8 @@ app.post('/initialize_db', (req, res) => {
       Department TEXT,
       Expertise TEXT,
       Email TEXT,
-      Location TEXT
+      Location TEXT,
+      AvatarUrl TEXT
     );
   `;
 

@@ -1,16 +1,13 @@
-// UserCard.js
 import * as React from 'react';
-import Avatar from '@mui/joy/Avatar';
-import Box from '@mui/joy/Box';
-import Button from '@mui/joy/Button';
-import Card from '@mui/joy/Card';
-import CardContent from '@mui/joy/CardContent';
-import CardActions from '@mui/joy/CardActions';
-import Typography from '@mui/joy/Typography';
-import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import Avatar from '@mui/material/Avatar';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 
-export default function UserCard({ user }) { // Accept user prop
-    return (
+export default function UserCard({ user }) { 
+  return (
     <Card
       variant="outlined"
       sx={{
@@ -19,26 +16,34 @@ export default function UserCard({ user }) { // Accept user prop
         resize: 'horizontal',
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center', // Center the content
-        gap: 2, // Adds space between items
+        alignItems: 'center',
+        gap: 2,
       }}
     >
-      <Avatar src={user.avatar} alt={user.name} sx={{ width: 80, height: 80 }} /> {/* Use dynamic data and adjust size */}
-      <CardContent sx={{ textAlign: 'center' }}> 
-      {/* Center the text */}
-      
-        <Typography level="h6">{user.name}</Typography> {/* Use dynamic data */}
-        <Typography level="body2">{user.bio || 'No bio available'}</Typography> {/* Use dynamic data or fallback */}
-       Specialisation: <Typography level="body2">{user.specialisation}</Typography> {/* Example for speciality */}
-       e-mail: <Typography level="body2">{user.email}</Typography> {/* Example for email */}
-      phone:  <Typography level="body2">{user.phone}</Typography> {/* Example for phone */}
-     location: <Typography level="body2">{user.location}</Typography> {/* Example for location */}
+      <Avatar src={user.avatar} alt={user.name} sx={{ width: 80, height: 80 }} />
+      <CardContent sx={{ textAlign: 'center' }}>
+        <Typography variant="h6">{user.name}</Typography>
+        {user.description && (
+          <Typography variant="body2">{user.description}</Typography>
+        )}
+        <Typography variant="body2">
+          Specialisation: {user.expertise || 'Not provided'}
+        </Typography>
+        <Typography variant="body2">
+          e-mail: {user.email || 'Not provided'}
+        </Typography>
+        <Typography variant="body2">
+          phone: {user.phone || 'Not provided'}
+        </Typography>
+        <Typography variant="body2">
+          location: {user.location || 'Not provided'}
+        </Typography>
       </CardContent>
-      <CardActions sx={{ justifyContent: 'center' }}> {/* Center the buttons */}
-        <Button variant="outlined" color="neutral">
+      <CardActions sx={{ justifyContent: 'center' }}>
+        <Button variant="outlined">
           View
         </Button>
-        <Button variant="solid" color="primary">
+        <Button variant="contained" color="primary">
           Contact
         </Button>
       </CardActions>
