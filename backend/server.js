@@ -1,16 +1,13 @@
 const express = require('express');
-const cors = require('cors'); // Ensure cors is required
+const cors = require('cors');
 const sqlite3 = require('sqlite3').verbose();
 const app = express();
 const PORT = 3001;
 
 // Enable all CORS requests
 app.use(cors());
-
-// Enable parsing of JSON bodies
 app.use(express.json());
 
-// SQLite setup
 let db = new sqlite3.Database('./database/tami_me.db', (err) => {
   if (err) {
     console.error(err.message);
@@ -18,12 +15,33 @@ let db = new sqlite3.Database('./database/tami_me.db', (err) => {
   console.log('Connected to the SQLite database.');
 });
 
-// Root endpoint
 app.get('/', (req, res) => {
   res.send('Hello from the backend!');
 });
 
-// Get all employees
+// Initialize database
+app.post('/initialize_db', (req, res) => {
+  const createTableQuery = `
+    CREATE TABLE IF NOT EXISTS Employees (
+      ID INTEGER PRIMARY KEY,
+      FirstName TEXT,
+      LastName TEXT,
+      Department TEXT,
+      Expertise TEXT,
+      Email TEXT,
+      Location TEXT
+    );
+  `;
+  
+  db.run(createTableQuery, (err) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json({ message: 'Database initialized successfully' });
+  });
+});
+
 app.get('/employees', (req, res) => {
   db.all('SELECT * FROM Employees;', [], (err, rows) => {
     if (err) {
@@ -37,7 +55,6 @@ app.get('/employees', (req, res) => {
   });
 });
 
-// Get a single employee by ID
 app.get('/employees/:id', (req, res) => {
   const sql = 'SELECT * FROM Employees WHERE ID = ?;';
   db.get(sql, [req.params.id], (err, row) => {
@@ -56,11 +73,10 @@ app.get('/employees/:id', (req, res) => {
   });
 });
 
-// Search employees
-app.post('/search', (req, res) => {
-  const query = req.body.query;
-  const sql = 'SELECT * FROM Employees WHERE expertise LIKE ? OR firstName LIKE ? OR lastName LIKE ?';
-  const params = [`%${query}%`, `%${query}%`, `%${query}%`];
+app.get('/search', (req, res) => {
+  const query = req.query.query;
+  const sql = 'SELECT * FROM Employees WHERE Expertise LIKE ? OR FirstName LIKE ? OR LastName LIKE ? OR Location LIKE ?';
+  const params = [`%${query}%`, `%${query}%`, `%${query}%`, `%${query}%`];
 
   db.all(sql, params, (err, rows) => {
     if (err) {
@@ -71,12 +87,10 @@ app.post('/search', (req, res) => {
   });
 });
 
-// Start server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
 
-// Close the database connection on server close
 process.on('SIGINT', () => {
   db.close(() => {
     console.log('Database connection closed.');
