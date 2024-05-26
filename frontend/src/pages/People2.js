@@ -73,7 +73,7 @@ const People2 = () => {
     <Container>
       <Box display="flex" justifyContent="center" marginBottom={4}>
         <Typography variant="h4" component="h1">
-          List of People working in the Law Firm
+        Looking for an employee with specific expertise or location? I'm your AI assistant. Ask me anything in any language!
         </Typography>
       </Box>
 
