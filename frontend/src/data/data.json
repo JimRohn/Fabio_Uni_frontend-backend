@@ -1,0 +1,61 @@
+[
+    {
+      "type": "Technical",
+      "course_list": [
+        {
+          "name": "Lawyers AI Mastery Course",
+          "duration": 20,
+          "image": "./GDPR.jpeg",
+          "progress": 50
+        },
+        {
+          "name": "Best Data Management Courses and Training",
+          "duration": 15,
+          "image": "./logo512.png",
+          "progress": 70
+        },
+        {
+          "name": "Jira Training",
+          "duration": 10,
+          "image": "./Screenshot 2024-05-26 at 19.01.11.png",
+          "progress": 30
+        },
+        {
+          "name": "Office Training",
+          "duration": 8,
+          "image": "/images/office_training.jpg",
+          "progress": 90
+        }
+      ]
+    },
+    {
+      "type": "Law",
+      "course_list": [
+        {
+          "name": "Business Law",
+          "duration": 12,
+          "image": "/images/business_law.jpg",
+          "progress": 60
+        },
+        {
+          "name": "Commercial Law",
+          "duration": 10,
+          "image": "/images/commercial_law.jpg",
+          "progress": 20
+        },
+        {
+          "name": "International Law",
+          "duration": 15,
+          "image": "/images/international_law.jpg",
+          "progress": 80
+        },
+        {
+          "name": "Criminal Law",
+          "duration": 25,
+          "image": "/images/criminal_law.jpg",
+          "progress": 40
+        }
+      ]
+    }
+  ]
+  

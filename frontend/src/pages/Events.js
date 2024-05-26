@@ -44,9 +44,9 @@ function Events() {
 
   return (
     <Box display="flex" flexDirection="row" alignItems="flex-start" minHeight="100vh" padding={2}>
-      <Box flex="1" maxWidth="400px" display="flex" flexDirection="column" alignItems="center">
+      <Box flex="1" maxWidth="400px">
         <Typography variant="h4" gutterBottom>
-          Calendar
+             Events Calendar
         </Typography>
         <DateCalendarViews onDateClick={handleDateClick} />
       </Box>

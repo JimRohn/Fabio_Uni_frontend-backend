@@ -28,22 +28,28 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function RecipeReviewCard(props) {
-  const { title, date, image, progress, avatar } = props;
+export default function RecipeReviewCard() {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
+  // Get the current date
+  const currentDate = new Date().toLocaleDateString("en-GB", {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+
   return (
-    <Card sx={{ maxWidth: 400, minWidth: 350 }}>
+    <Card sx={{ maxWidth: 345 }}>
       <CardHeader
         avatar={
           <Avatar
             sx={{ bgcolor: red[500] }}
             aria-label="recipe"
-            src={avatar}
+            src="/images/avatars/avatar1.jpg" // Path to your avatar image
           />
         }
         action={
@@ -51,23 +57,22 @@ export default function RecipeReviewCard(props) {
             <MoreVertIcon />
           </IconButton>
         }
-        title={title}
-        subheader={date}
+        title="AI Course for Lawyers"
+        subheader={currentDate}
       />
       <CardMedia
         component="img"
-        height="200"
-        image={image}
-        alt="Course image"
-        sx={{ objectFit: 'contain', objectPosition: 'center', width: '100%' }}
+        height="194"
+        image="/images/courses/AI_Law.jpeg"
+        alt="AI Course"
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
           Progress
         </Typography>
-        <LinearProgress variant="determinate" value={progress} sx={{ marginBottom: 2 }} />
+        <LinearProgress variant="determinate" value={50} sx={{ marginBottom: 2 }} />
         <Typography variant="body2" color="text.secondary" sx={{ textAlign: 'center' }}>
-          {progress}%
+          50%
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
