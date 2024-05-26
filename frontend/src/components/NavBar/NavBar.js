@@ -15,11 +15,14 @@ import WorkIcon from '@mui/icons-material/Work';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import SchoolIcon from '@mui/icons-material/School';
 import HomeIcon from '@mui/icons-material/Home';
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import SignIn from '../SignIn';
 
 const drawerWidth = 240;
 
 const drawerItems = [
+  { text: "Sign In", icon: <VpnKeyIcon />, path: "/SignIn" },
   { text: "Home", icon: <HomeIcon />, path: "/" }, // Changed path to "/"
   { text: "People", icon: <PeopleIcon />, path: "/users" }, // Adjusted path
   { text: "Matters", icon: <WorkIcon />, path: "/matters" },

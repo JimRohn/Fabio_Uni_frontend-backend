@@ -12,6 +12,7 @@ import UserList from "./pages/UserList";
 import Events from "./pages/Events";
 import Matters from "./pages/Matters";
 import People2 from "./pages/People2";
+import SignIn from "./components/SignIn";
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
           <Route path="/matters" element={<Matters />} />
           <Route path="/learning" element={<Learning />} />
           <Route path="/people2" element={<People2 />} />
+          <Route path="/signin" element={<SignIn />} />
           {/* ... other routes */}
         </Routes>
       </Box>
