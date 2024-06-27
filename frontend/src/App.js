@@ -2,7 +2,6 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React from "react";
 import SearchAppBar from "./components/SearchAppBar/SearchAppBar";
-import SemanticSearchBar from "./components/SemanticSearchBar/SemanticSearchBar";
 import Home from "./pages/Home";
 import UserProfile from "./pages/UserProfile";
 import PermanentDrawerLeft from "./components/NavBar/NavBar";
@@ -34,14 +33,15 @@ function App() {
       >
         <Toolbar /> {/* This pushes content down below AppBar */}
         <Routes>
-          <Route path="/" element={<Home />} />
+
+          <Route path="/home" element={<Home />} />
           <Route path="/users" element={<UserList />} />
           <Route path="/user-profile/:id" element={<UserProfile />} />
           <Route path="/events" element={<Events />} />
           <Route path="/matters" element={<Matters />} />
           <Route path="/learning" element={<Learning />} />
           <Route path="/people2" element={<People2 />} />
-          <Route path="/signin" element={<SignIn />} />
+          <Route path="/" element={<SignIn />} />
           {/* ... other routes */}
         </Routes>
       </Box>
@@ -50,3 +50,5 @@ function App() {
 }
 
 export default App;
+
+

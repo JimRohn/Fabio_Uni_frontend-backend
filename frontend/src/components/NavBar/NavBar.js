@@ -22,8 +22,8 @@ import SignIn from '../SignIn';
 const drawerWidth = 240;
 
 const drawerItems = [
-  { text: "Sign In", icon: <VpnKeyIcon />, path: "/SignIn" },
-  { text: "Home", icon: <HomeIcon />, path: "/" }, // Changed path to "/"
+  { text: "Sign In", icon: <VpnKeyIcon />, path: "/" },
+  { text: "Home", icon: <HomeIcon />, path: "/home" }, // Changed path to "/"
   { text: "People", icon: <PeopleIcon />, path: "/users" }, // Adjusted path
   { text: "Matters", icon: <WorkIcon />, path: "/matters" },
   { text: "Events", icon: <CalendarMonthIcon />, path: "/events" },

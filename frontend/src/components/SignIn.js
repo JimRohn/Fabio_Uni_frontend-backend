@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
+import Home from '../pages/Home';
 
 function Copyright(props) {
   return (
@@ -41,7 +42,7 @@ export default function SignIn() {
     });
 
     // Navigate to the Home page upon form submission
-    navigate('/');
+    navigate('/home');
   };
 
   return (
